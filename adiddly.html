@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>adiddly</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100vh;
+      height: 100vh;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ring {
+      margin: 0 auto;
+      position: absolute;
+      text-align: center;
+      border: 2px solid;
+      border-radius: 50%;
+      animation: spin 2.5s linear infinite;
+    }
+
+    img.center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 50%;
+      z-index: 10;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(45deg); }
+      75% { transform: rotate(135deg); }
+      100% { transform: rotate(180deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="adiddly.png" alt="adiddly" class="center">
+    <script>
+      const container = document.querySelector('.container');
+      const rings = 30;
+      const sizeBase = window.innerHeight;
+
+      for (let n = 1; n <= rings; n++) {
+        const perc = (rings - n) / rings;
+        const size = sizeBase * perc;
+        const ring = document.createElement('div');
+        ring.classList.add('ring');
+        ring.style.width = `${size}px`;
+        ring.style.height = `${size}px`;
+        ring.style.top = `${(sizeBase / 2) - (size / 2)}px`;
+        ring.style.left = `${(sizeBase / 2) - (size / 2)}px`;
+        ring.style.borderColor = `rgb(${255 * perc}, ${255 * perc}, ${255 * perc})`;
+        ring.style.animationDelay = `${1.25 * (2.5 * perc)}s`;
+        container.appendChild(ring);
+      }
+    </script>
+  </div>
+</body>
+</html>
